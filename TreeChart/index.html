@@ -1,0 +1,24 @@
+<head>
+	<script type="text/javascript" src="js/Chart.js"></script>
+	<script type="text/javascript" src="js/ChartManager.js"></script>
+	<script type="text/javascript" src="js/data/ChartData.js"></script>
+		<script type="text/javascript" src="js/lib/raphael.js"></script>
+	<script type="text/javascript" src="js/data/BigData.js"></script>
+	<script type="text/javascript" src="js/data/WorldData.js"></script>
+	<style>
+		#myBody{
+			background-color: 'red';
+		}
+	</style>
+</head>
+<body id="myBody">
+	<div id="canvas"></div>
+	<script type="text/javascript">
+		var client = new WorldData();
+		var data=client.getData();
+		var paper = Raphael(0, 0, 1500, 1500);
+		var manager=  new ChartManager(700,600,data,"#canvas",paper);
+	</script>
+</body>
+
+
