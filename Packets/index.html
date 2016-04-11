@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<script type="text/javascript" src="js/Packets.js"></script>
+		<script type="text/javascript" src="js/Stack.js"></script>
+		<script type="text/javascript" src="js/Queue.js"></script>
+		<script type="text/javascript" src="js/NNode.js"></script>
+		<script type="text/javascript" src="js/SinglyLinkedList.js"></script>
+		<script type="text/javascript" src="js/DoublyLinkedList.js"></script>
+		<script type="text/javascript" src="js/Tree.js"></script>
+		<script type="text/javascript" src="js/BSTree.js"></script>
+		<script type="text/javascript" src="js/Graph.js"></script>
+		<script type="text/javascript" src="js/Set.js"></script>
+		<script type="text/javascript" src="js/CircularQueue.js"></script>
+
+	</head>
+	<center>
+	<body>
+		<script type="text/javascript">
+		// To run a Set DataStructure first create an instance 
+		// of the Packets.Set class
+		// Then with that instance call the various functions available in
+		// the Packets.Set Class
+		 	
+			//Creating a Stack
+			var stack = new Packets.Stack(5);
+			//pushing data to stack
+			stack.s_push(2);stack.s_push(4);stack.s_push(3);
+			stack.s_push(49);stack.s_push(11);stack.s_push(6);
+			//asking for the topmost data on Stack
+			stack.s_peek(); 
+			//removing topmost data from stack
+			stack.s_pop();
+			//displaying entire stack
+			stack.s_display();
+
+			//Creating a Queue
+			document.write("<br> <br><br> Creating Queue<br>")
+			var queue =new Packets.CircularQueue(5);
+			queue.cq_insert(66);queue.cq_insert(21);queue.cq_insert(17);
+			queue.cq_insert(39);queue.cq_insert(4);queue.cq_insert(17);
+			queue.cq_insert(17);queue.cq_insert(66);queue.cq_insert(21);
+			queue.cq_delete();
+			queue.cq_display();
+
+
+		 	//Creating a set 
+			 var set3 = new Packets.Set();
+			// // // adding data to set
+			 set3.addData(3);set3.addData(2);set3.addData(36);
+			// // // removing data{36} from set
+			 set3.removeData(3);
+			// // // creating another Set
+			 var set4 = new Packets.Set();
+			 set4.addData(10);set4.addData(1);set4.addData(2);
+			// // // performing intersection of the sets
+			 var uniSet=set3.union(set4);
+			 uniSet.show();
+
+			var set = new Packets.Set();
+			set.addData(3);set.addData(2);set.addData(31);
+			var set2 = new Packets.Set();
+			set2.addData(3);set2.addData(2);set2.addData(33);set2.addData(45);
+			set2.removeData(45); set2.removeData(3);
+			var x=set.intersect(set2);
+			x.show();
+			//set.sortSet();
+			set2.show();
+
+		</script>
+		
+	</body>
+</center>
+
+<html>
