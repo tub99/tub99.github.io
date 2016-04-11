@@ -1,0 +1,77 @@
+Language Definition
+
+------------------------------------------------------------------
+123.5-->{type:number ,value: 123.5}
+"Hello World"--> {type: string ,value:"Hello World"}
+foo(a,1)-->{
+                 type : call,
+                 "func":{type:var ,value:foo},
+                  args: [{type:var, value:a},{type:num,value:1}]
+               }
+
+if foo then bar else baz
+			{
+				type:if,
+				cond:{type:var , value:foo},
+                                then:{type:var,value:bar},
+				else:{type:var,value:baz}
+			} 
+
+------------------------------------------------------------------
+a = 10        
+			{
+				type: assign,
+				operator:=,
+				left: {type:var,value:a},
+				right:{type:num,value:10}
+
+				}    
+------------------------------------------------------------------
+(x)+((y*z))
+{
+	type:binary,
+	operator: +,
+    left:{type:var,value:x},
+    right:{
+    		type:binary,
+    		operator:*
+    		left:{type:var,value:y}
+    		right:{type:var, value:z}
+    	}
+	
+}	
+-------------------------------------------------------------------
+{
+	a=5;
+	b=a*2;  
+	a+b;
+}	
+type: prog
+prog[		             
+	Type is Assignment 
+	Operator is =
+	Left 
+		Type is var, value is a
+	Right 
+		Type is num and value is 5
+
+
+	Type is "assign"
+	Operator is =
+	Left 
+		is type is var and value is b
+	Right 
+		is binary
+			Operator is *
+				Left 
+					type is var and value is a
+				Right 
+					type is num and value is 2
+
+		Type is binary
+			Operator is +
+		Left  
+			type var and value is a
+		Right 
+			type is var and value is b
+]
