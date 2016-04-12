@@ -3,7 +3,7 @@ function ChartData()
 
 	var datObj={
 		"label": "World",
-		"value": 100,
+		"value": 150,
 		"data":[
 				{"label":"Africa " ,"value":30 ,
 					"data":[
@@ -37,8 +37,21 @@ function ChartData()
 							}
 						]
 				},
-				{"label":"Australia" ,"value": 15},
-				{"label":"America" ,"value": 5}
+				{"label":"Australasia" ,"value": 40,
+					"data":[{"label":"Australia","value":25,
+							"data":[{"label":"Sydney","value":15},{"label":"Perth","value":10}]
+					},
+					{"label":"New Guinea","value":5},
+					{"label":"New-Zeland","value":10}]
+				},
+				{"label":"America" ,"value": 30,
+				"data":[
+						{"label":"S1","value":10},
+						{"label":"S2","value":15},
+						{"label":"S3","value":2},
+						{"label":"S4","value":3}
+					]
+				}
 			]
 	};
 	this.getData=function(){

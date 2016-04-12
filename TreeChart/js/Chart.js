@@ -12,6 +12,7 @@ function Chart()
 		nodeArray=[],
 		setArr=[],
 		scalefactor,
+		tool,
 		parseData=function(pData) {
 			var i=0,
 				j=0,
@@ -40,7 +41,7 @@ function Chart()
 
 					//calculating datas for parent Node
 					if(level_cnt===0){
-						node={nodelabel:pData.label,X:width/2,Y:height-parentNodeValue,nodeRadius:parentNodeValue,parentlabel:"None",pX:"",pY:"",angle:360};		
+						node={nodelabel:pData.label,X:width/2,Y:height-parentNodeValue,nodeRadius:parentNodeValue,parentlabel:"None",pX:"",pY:"",angle:360,Value:pData.value};		
 						nodeArray.push(node);
 						
 					}
@@ -48,7 +49,7 @@ function Chart()
 					while(i<pData.data.length) {
 						// theta changes according to level
 						if(level_cnt === 0) {
-							theta+=150/pData.data.length-1;
+							theta+=150/Number(pData.data.length);
 							px=width/2;
 							py=height-parentNodeValue;
 
@@ -60,9 +61,12 @@ function Chart()
 								if(nodeArray[k].nodelabel === pData.label) {
 									px=nodeArray[k].X;
 									py=nodeArray[k].Y;
-									theta+=150/pData.data.length-1;//+nodeArray[k].angle;
-									console.log("In "+pData.data[i].label+" added is"+nodeArray[k].angle+" whose Parent "+nodeArray[k].nodelabel);
-									console.log("So total angle of "+pData.data[i].label+" is "+theta);
+									//Shifting according to parent to spatially distribute children nodes
+									// if(i===0)
+									// theta=nodeArray[k].angle;
+									theta+=150/Number(pData.data.length);//+nodeArray[k].angle;
+									//console.log("In "+pData.data[i].label+" added is"+nodeArray[k].angle+" whose Parent "+nodeArray[k].nodelabel);
+									//console.log("So total angle of "+pData.data[i].label+" is "+theta);
 									break;
 								}
 							}
@@ -74,7 +78,7 @@ function Chart()
 						y=(py)-(radius*Math.sin(radian));
 						nR=pData.data[i].value*scalefactor;
 						//Creating nodes for every component
-						node={nodelabel:pData.data[i].label,X:x,Y:y,nodeRadius:nR,parentlabel:pData.label,pX:px,pY:py,angle:theta};
+						node={nodelabel:pData.data[i].label,X:x,Y:y,nodeRadius:nR,parentlabel:pData.label,pX:px,pY:py,angle:theta,Value:pData.data[i].value};
 						nodeArray.push(node);
 
 						i++;
@@ -94,6 +98,13 @@ function Chart()
 			}
 
 		},
+		getValue = function(id) {
+			for(var i=0;i<nodeArray.length;i++) {
+				if(nodeArray[i].nodelabel === id)
+					return nodeArray[i].Value;
+			}
+			return "";
+		},
 		drawComponents = function() {
 			var i=0,
 			colorPalette=['blue','red','orange','green','aqua','maroon','purple','gray','yellow','magenta','lime'],
@@ -106,7 +117,7 @@ function Chart()
 				title,
 				pY;
 			//Drawing Chart Title
-			title=paper.text(nodeArray[0].X,nodeArray[0].Y+1.5*nodeArray[0].nodeRadius,"Bottom-Up Tree Chart").attr('font-size',50);
+			title=paper.text(nodeArray[0].X,nodeArray[0].Y+1.5*nodeArray[0].nodeRadius,"Bottom-Up Tree Chart(Comparative Analysis)").attr('font-size',50);
 			st.push(title);
 
 			// Drawing line first so that nodes remain above them	
@@ -135,11 +146,46 @@ function Chart()
 				//line=paper.path(['M',pX,pY,'L',X,Y]).attr({'stroke-dasharray':'--'});
 				circle = paper.circle(X, Y,nodeRadius);
 				// Sets the fill attribute of the circle to red (#f00)
-				circle.attr({"fill": "#f00",'opacity':0.8});
-				txt=paper.text(X,Y,dataLabel).attr({'font-size':20});
+				circle.attr({"fill": "#f00",'opacity':0.8}).id=dataLabel;
+				//adding animations
+				circle.mouseover(function(){
+
+					var frac=Number(getValue(this.id))/chartData.value*100;
+					this.attr({'fill':'#06362B','opacity':0.8});
+					document.getElementById(tool).style.display="block";
+	                document.getElementById(tool).innerHTML="The percentage of "+ this.id +" is "+frac+"% of "+chartData.label;
+				});
+				circle.mouseout(function(){
+					this.attr({"fill": "#f00",'opacity':0.8});
+					document.getElementById(tool).style.display="none";
+				});
+				txt=paper.text(X,Y-15,dataLabel).attr({'font-size':20});
 				st.push(circle,txt);
 				i++;
 
+			}
+		},
+		adjustChartPosition = function(set_to_Adjust) {
+			var l_coord = set_to_Adjust.getBBox().x,
+			r_coord = set_to_Adjust.getBBox().x2,
+			t_coord = set_to_Adjust.getBBox().y,
+			b_coord = set_to_Adjust.getBBox().y2,
+			//Calculating middle of the element
+			cx = (l_coord + r_coord)/2,
+			cy = (t_coord + b_coord)/2;
+
+		//st.rotate(90,cx,cy);
+		set_to_Adjust.translate(400,150);
+
+		},
+		track = function(tooltip) {
+			document.onmousemove = function(e){text(e,tooltip);};
+			function text(e,tooltip){
+				var mx = e.clientX,
+					my = e.clientY;
+				
+				document.getElementById(tooltip).style.left = mx+5;
+				document.getElementById(tooltip).style.top = my+15;
 			}
 		};
 
@@ -147,31 +193,29 @@ function Chart()
 		chartData=data;
 	};
 
-	this.buildChart = function(ht,wd,el,pap)
+	this.buildChart = function(ht,wd,el,pap,toolId)
 	{
 		//paper = Raphael(0, 0, 700, 700);
 		height=ht;
 		width=wd;
 		paper=pap;
 		st=paper.set();
+		tool=toolId;
 		console.log((chartData.value).toString().length);
 		//Calculating scale factor
 		//scalefactor=(Number(chartData.value)/Math.pow(10,(chartData.value).toString().length)*5);
 		scalefactor=75/Number(chartData.value);
 		p_Data=parseData(chartData);
+		track(toolId);
 		//Drawing is done here
 		drawComponents();
 		//Adjusting chart position
-		var l_coord = st.getBBox().x,
-			r_coord = st.getBBox().x2,
-			t_coord = st.getBBox().y,
-			b_coord = st.getBBox().y2;
-
-		var cx = (l_coord + r_coord)/2,
-			cy = (t_coord + b_coord)/2;
-
-		//st.rotate(90,cx,cy);
-		st.translate(400,150);
+		adjustChartPosition(st);
+		console.log(document.getElementById(toolId));
+		//Tracking cursor for data display
 		
+
+		
+		//onsole.log(nodeArray);
 	};
 }

@@ -6,18 +6,26 @@
 	<script type="text/javascript" src="js/data/BigData.js"></script>
 	<script type="text/javascript" src="js/data/WorldData.js"></script>
 	<style>
-		#myBody{
-			background-color: 'red';
-		}
+		#tooltip{
+	        display: none;
+	        background-color:blue;
+	        padding: 5px;
+	        position: absolute;
+	        opacity: 1;
+	        color:white;
+	        border: 1px;
+	        
+	    }
 	</style>
 </head>
 <body id="myBody">
+	<div id="tooltip"></div>
 	<div id="canvas"></div>
 	<script type="text/javascript">
 		var client = new WorldData();
 		var data=client.getData();
 		var paper = Raphael(0, 0, 1500, 1500);
-		var manager=  new ChartManager(700,600,data,"#canvas",paper);
+		var manager=  new ChartManager(700,600,data,"#canvas",paper,"tooltip");
 	</script>
 </body>
 
