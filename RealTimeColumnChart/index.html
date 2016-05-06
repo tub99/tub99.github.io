@@ -1,0 +1,19 @@
+<head>
+	<script type="text/javascript" src="js/Chart.js"></script>
+	<script type="text/javascript" src="js/ChartManager.js"></script>
+	<script type="text/javascript" src="js/data/ChartData.js"></script>
+	<script type="text/javascript" src="js/library/raphael.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body id="myBody">
+	<div id="tooltip"></div>
+	<div id="canvas"></div>
+	<script type="text/javascript">
+		var client = new ChartData();
+		var data=client.getData();
+		var canvas=document.getElementById('canvas');
+		var paper = Raphael(canvas, 800, 600);
+		var manager=  new ChartManager(800,600,data,paper,"tooltip");
+	</script>
+</body>
