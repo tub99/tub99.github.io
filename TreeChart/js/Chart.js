@@ -107,7 +107,7 @@ function Chart()
 		},
 		drawComponents = function() {
 			var i=0,
-			colorPalette=['blue','red','orange','green','aqua','maroon','purple','gray','yellow','magenta','lime'],
+			colorPalette=['blue','red','lime','green','aqua','maroon','purple','gray','yellow','magenta','lime','#f3a302','#0541e0','#be7853','#3e482a','#ea71e2'],
 				X,
 				Y,
 				dataLabel,
@@ -129,7 +129,7 @@ function Chart()
 				pX=nodeArray[i].pX;
 				pY=nodeArray[i].pY;
 				if(i>0) {
-					line=paper.path(['M',pX,pY,'L',X,Y]).attr({'stroke-dasharray':'--','stroke-width':2});
+					line=paper.path(['M',pX,pY,'L',pX,pY]).attr({'stroke-dasharray':'--','stroke-width':2}).animate({'path':['M',pX,pY,'L',X,Y]},2000);
 					st.push(line);
 				}		
 				i++;
@@ -144,22 +144,24 @@ function Chart()
 				pX=nodeArray[i].pX;
 				pY=nodeArray[i].pY;
 				//line=paper.path(['M',pX,pY,'L',X,Y]).attr({'stroke-dasharray':'--'});
-				circle = paper.circle(X, Y,nodeRadius);
+				circle = paper.circle(X, Y,0);
 				// Sets the fill attribute of the circle to red (#f00)
-				circle.attr({"fill": "#f00",'opacity':0.8}).id=dataLabel;
+				circle.attr({"fill": colorPalette[(i%colorPalette.length)],'opacity':0.8}).animate({r:nodeRadius},3000,"bounce");
+				circle.id=dataLabel;
+				/* jshint loopfunc:true */
 				//adding animations
 				circle.mouseover(function(){
 
-					var frac=Number(getValue(this.id))/chartData.value*100;
+					var frac=(Number(getValue(this.id))/chartData.value*100).toFixed(2);
 					this.attr({'fill':'#06362B','opacity':0.8});
 					document.getElementById(tool).style.display="block";
-	                document.getElementById(tool).innerHTML="The percentage of "+ this.id +" is "+frac+"% of "+chartData.label;
+					document.getElementById(tool).innerHTML="The percentage of "+ this.id +" is "+frac+"% of "+chartData.label;
 				});
 				circle.mouseout(function(){
 					this.attr({"fill": "#f00",'opacity':0.8});
 					document.getElementById(tool).style.display="none";
 				});
-				txt=paper.text(X,Y-15,dataLabel).attr({'font-size':20});
+				txt=paper.text(X,Y-15,dataLabel).attr({'font-size':0}).animate({'font-size':20},2000);
 				st.push(circle,txt);
 				i++;
 
@@ -204,7 +206,7 @@ function Chart()
 		console.log((chartData.value).toString().length);
 		//Calculating scale factor
 		//scalefactor=(Number(chartData.value)/Math.pow(10,(chartData.value).toString().length)*5);
-		scalefactor=75/Number(chartData.value);
+		scalefactor=55/Number(chartData.value);
 		p_Data=parseData(chartData);
 		track(toolId);
 		//Drawing is done here
