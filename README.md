@@ -4,4 +4,5 @@
 <b>Dynamic-Column-Chart-Builder</b> link : http://tub99.github.io/Column%20Chart%20Builder/index.html<br>
 <b>Job-Simulator</b> link : http://tub99.github.io/JobSimulator/index.html<br>
 <b>DataStructure-Library</b> link : http://tub99.github.io/Packets/index.html<br>
-<b>Virtual KeyBoard Generator</b> link :https://github.com/tub99/Virtual-Keyboard-Generator/blob/master/VirtualKeyboard/index.html
+<b>Virtual KeyBoard Generator</b> link :http://tub99.github.io/VirtualKeyboard/index.html
+<b>Real Time Column Chart</b> link:http://tub99.github.io/RealTimeColumnChart/index.html
