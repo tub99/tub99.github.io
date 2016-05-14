@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<style type="text/css">
+	
+			@keyframes example 
+			{
+    			0%   {background-color: silver;}
+    			25%  {background-color: gray;}
+    			50%  {background-color: silver;}
+    			75%  {background-color: gray;}
+    			100% {background-color: silver;}
+			}
+			#myBody{
+				background:linear-gradient(to right,#2F4F4F,silver,#2F4F4F);
+
+			}
+			#titl{
+				font-size: 50px;
+				font-weight: 54px;
+			}
+			#Kaspersky{
+				background: linear-gradient(to right,  	#B0C4DE ,  	#2F4F4F); 
+				border:2px solid black;
+				box-shadow: 5px 5px;
+			}
+			#Norton{
+				background: linear-gradient(to right, #B0C4DE , #2F4F4F); 
+				border:2px solid black;
+				margin: 5px;
+				padding-left: 15px;
+				padding-right: 15px;
+				box-shadow: 5px 5px;
+
+			}
+		</style>
+		<script type="text/javascript" src="js/RadarChart.js"></script>
+		<script type="text/javascript" src="js/RadarChartData.js"></script>
+		<script type="text/javascript" src="js/RadarChartManager.js"></script>
+	</head>
+
+	<body id="myBody">
+		<center>
+
+				<div id="titl">RADAR CHART</div>
+				<svg id="mySvg" width="700" height="400" xmlns="http://www.w3.org/2000/svg"></svg>
+				<div id="myDiv">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+			<script type="text/javascript">
+		        var manager=new RadarChartManager("mySvg","myDiv");
+		        manager.createChart();
+		        
+		      
+		    </script>
+		</center>
+	</body>
+</html>
