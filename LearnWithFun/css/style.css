@@ -50,3 +50,6 @@
 	  		font-family: cursive;
 	  		font-size: 50px;
 	  	}
+		td{
+			width: 150px;
+		}
