@@ -19,13 +19,12 @@
 	</style>
 </head>
 <body id="myBody">
-	
-	<div id="canvas"></div>
 	<div id="tooltip"></div>
+	<div id="canvas"></div>
 	<script type="text/javascript">
 		var client = new WorldData();
 		var data=client.getData();
-		var paper = Raphael(document.getElementById('canvas'),1500, 1700);
+		var paper = Raphael(0, 0, 1500, 1700);
 		var manager=  new ChartManager(700,600,data,"#canvas",paper,"tooltip");
 	</script>
 </body>

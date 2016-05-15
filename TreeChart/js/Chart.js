@@ -107,7 +107,7 @@ function Chart()
 		},
 		drawComponents = function() {
 			var i=0,
-			colorPalette=['blue','red','lime','green','aqua','maroon','purple','gray','yellow','magenta','lime','#f3a302','#0541e0','#be7853','#3e482a','#ea71e2'],
+			colorPalette=['blue','lime','green','aqua','maroon','purple','gray','yellow','magenta','lime','#f3a302','#0541e0','#be7853','#3e482a','#ea71e2'],
 				X,
 				Y,
 				dataLabel,
@@ -146,7 +146,7 @@ function Chart()
 				//line=paper.path(['M',pX,pY,'L',X,Y]).attr({'stroke-dasharray':'--'});
 				circle = paper.circle(X, Y,0);
 				// Sets the fill attribute of the circle to red (#f00)
-				circle.attr({"fill": colorPalette[(i%colorPalette.length)],'opacity':0.8}).animate({r:nodeRadius},3000,"bounce");
+				circle.attr({"fill": '#ff0000','opacity':0.8}).animate({r:nodeRadius},3000,"bounce");
 				circle.id=dataLabel;
 				/* jshint loopfunc:true */
 				//adding animations
@@ -158,7 +158,7 @@ function Chart()
 					document.getElementById(tool).innerHTML="The percentage of "+ this.id +" is "+frac+"% of "+chartData.label;
 				});
 				circle.mouseout(function(){
-					this.attr({"fill": "#f00",'opacity':0.8});
+					this.attr({"fill": '#ff0000','opacity':0.8});
 					document.getElementById(tool).style.display="none";
 				});
 				txt=paper.text(X,Y-15,dataLabel).attr({'font-size':0}).animate({'font-size':20},2000);
