@@ -49,7 +49,40 @@
 	  	h1{
 	  		font-family: cursive;
 	  		font-size: 50px;
+	  		color:#990033;
 	  	}
-		td{
-			width: 150px;
-		}
+	  td{
+	  		width: 150px;
+	  	}
+	  	#submit{
+	  		height: 50px;
+	  		width: 75px;
+	  		font-size: 15px;
+	  		font-weight: bold;
+	  	}
+	  	#hint{
+	  		font-size: 15px;
+			border-radius: 15px;
+			height: 30px;
+	  		font-weight : bold;
+	  		font-family: cursive;
+	  		background-color : #cc3300;
+	  		color:white;
+
+	  	}
+	  	#hintLabel{
+	  		font-size: 20px;
+			font-family : cursive;
+			color : #800000;
+	  	}
+	  	#restart{
+	  		height: 90px;
+	  		width: 450px;
+	  		font-size: 30px;
+	  		background-color: #800000;
+	  		font-family: cursive;
+	  		border-radius: 20px;
+	  	}
+	  	#thanks{
+	  		color: #F25617;
+	  	}
